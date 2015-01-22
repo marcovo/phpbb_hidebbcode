@@ -1,0 +1,31 @@
+{
+   "name": "marcovo/hide_bbcode",
+   "type": "phpbb-extension",
+   "description": "With the [hide] bbcode, members can hide their message content from people that haven't posted in their topic.",
+   "homepage": "https://github.com/marcovo/phpbb_hidebbcode",
+   "version": "0.4.0-a1",
+   "license": "GPL-2.0",
+   "authors": [
+      {
+         "name": "Marco van Oort",
+         "email": "marcovoort@gmail.com",
+         "homepage": "https://github.com/marcovo",
+         "role": "Developer"
+      },
+      {
+         "name": "ycl6",
+         "email": "-",
+         "homepage": "",
+         "role": "Developer"
+      }
+   ],
+   "require": {
+      "php": ">=5.3.3"
+   },
+   "extra": {
+      "display-name": "[hide] BBcode",
+      "soft-require": {
+         "phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
+      }
+   }
+}
