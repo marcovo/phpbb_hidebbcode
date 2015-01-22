@@ -1,8 +1,8 @@
 <?php
 /** 
 *
-* @package MathJax
-* @copyright (c) 2014 Sérgio Faria and Marco van Oort
+* @package Hide_BBcode
+* @copyright (c) 2015 Marco van Oort
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License v2 
 *
 */
