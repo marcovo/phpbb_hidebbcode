@@ -45,9 +45,9 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.modify_text_for_display_after'	=> 'parse_bbcodes_after',
 
-			'core.modify_posting_parameters'				=> 'check_user_posted_topic',
-			'core.viewtopic_assign_template_vars_before'	=> 'check_user_posted_topic',
-			'core.ucp_pm_compose_quotepost_query_after'	=> 'check_user_posted_post',
+			'core.modify_posting_parameters'				=> 'check_user_posted_posting',
+			'core.viewtopic_assign_template_vars_before'	=> 'check_user_posted_viewtopic',
+			'core.ucp_pm_compose_quotepost_query_after'	=> 'check_user_posted_pm',
 			
 			'core.viewtopic_modify_post_row'	=> 'check_attachment',
 
@@ -62,18 +62,11 @@ class listener implements EventSubscriberInterface
 	*/
 	public function decode_message_after($event)
 	{
-		$message = $event['message'];
-
-		if ($this->b_hide == false)
+		if ($this->b_hide)
 		{
-			$message = preg_replace("#\[hide\](.*?)\[/hide\]#ise", "'\\1'", $message);
-		}
-		else
-		{
-			$message = preg_replace("#\[hide\].*?\[/hide\]#ise", $this->user->lang['HIDDEN_MESSAGE'], $message);
+			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#ise", $this->user->lang['HIDDEN_MESSAGE'], $event['message']);
 		}
 
-		$event['message'] = $message;
 	}
 
 	/**
@@ -81,25 +74,11 @@ class listener implements EventSubscriberInterface
 	*
 	* @param object $event The event object
 	*/
-	public function check_user_posted_topic($event)
+	public function check_user_posted_viewtopic($event)
 	{
 		$topic_id = $event['topic_id'];
-
-		// Check if the topic viewer has posted in a topic
-		$b_hide = true; 
-		if ($this->user->data['user_id'] != ANONYMOUS)
-		{
-			$sql = "SELECT poster_id, topic_id 
-				FROM " . POSTS_TABLE . "
-				WHERE topic_id = $topic_id 
-				AND poster_id = " . $this->user->data['user_id']; 
-
-			$result = $this->db->sql_query($sql);
-			$b_hide = $this->db->sql_affectedrows($result) ? false : true;
-			$this->db->sql_freeresult($result);
-		}
 		
-		$this->b_hide = $b_hide;
+		$this->check_user_posted_by_topicId($topic_id);
 	}
 
 	/**
@@ -107,19 +86,56 @@ class listener implements EventSubscriberInterface
 	*
 	* @param object $event The event object
 	*/
-	public function check_user_posted_post($event)
+	public function check_user_posted_posting($event)
+	{
+		$post_id = $event['post_id'];
+
+		$this->check_user_posted_by_postId($post_id);
+	}
+
+	/**
+	* Alter BBCodes after they are processed by phpBB
+	*
+	* @param object $event The event object
+	*/
+	public function check_user_posted_pm($event)
 	{
 		$post_id = $event['msg_id'];
-		$a_post = $event['post'];
 
+		$this->check_user_posted_by_postId($post_id);
+		
+		// The [hide]-tags aren't useful in pm's, so remove them if present
+		$post = $event['post'];
+		$post['message_text'] = str_replace(array('[hide]', '[/hide]'), '', $post['message_text']);
+		$event['post'] = $post;
+	}
+
+	/**
+	* Alter BBCodes after they are processed by phpBB
+	*
+	* @param object $event The event object
+	*/
+	private function check_user_posted_by_postId($post_id)
+	{
 		$sql = "SELECT topic_id 
 			FROM " . POSTS_TABLE . "
 			WHERE post_id = ".$post_id.""; 
 
 		$result = $this->db->sql_query($sql);
-		$topic_id = $db->sql_fetchrow($result);
+		$topic_id = $this->db->sql_fetchrow($result);
 		$topic_id = $topic_id['topic_id'];
 		$this->db->sql_freeresult($result);
+		
+		$this->check_user_posted_by_topicId($topic_id);
+	}
+
+	/**
+	* Alter BBCodes after they are processed by phpBB
+	*
+	* @param object $event The event object
+	*/
+	private function check_user_posted_by_topicId($topic_id)
+	{
 
 		// Check if the topic viewer has posted in a topic
 		$b_hide = true; 
@@ -161,11 +177,9 @@ class listener implements EventSubscriberInterface
 	*/
 	public function parse_bbcodes_after($event)
 	{
-		$text = $event['text'];
 
-		$text = preg_replace_callback('#<!-- HIDE_BBCODE -->(.*?)<!-- /HIDE_BBCODE -->#s', array($this, 'hidden_pass'), $text);
+		$event['text'] = preg_replace_callback('#<!-- HIDE_BBCODE -->(.*?)<!-- /HIDE_BBCODE -->#s', array($this, 'hidden_pass'), $event['text']);
 
-		$event['text'] = $text;
 	}
 	
 	
@@ -180,15 +194,15 @@ class listener implements EventSubscriberInterface
 		if ($this->b_hide)
 		{
 			$replacements = array(
-				$this->user->lang('ABBC3_HIDDEN_ON'),
-				$this->user->lang('ABBC3_HIDDEN_EXPLAIN'),
+				$this->user->lang('HIDE_BBCODE_HIDDEN'),
+				$this->user->lang('HIDE_BBCODE_HIDDEN_EXPLAIN'),
 				'hidebox_hidden',
 			);
 		}
 		else
 		{
 			$replacements = array(
-				$this->user->lang('ABBC3_HIDDEN_OFF'),
+				$this->user->lang('HIDE_BBCODE_SHOWN'),
 				$matches[1],
 				'hidebox_visible',
 			);
