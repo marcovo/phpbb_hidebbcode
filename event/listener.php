@@ -85,7 +85,7 @@ class listener implements EventSubscriberInterface
 	{
 		if ($this->b_hide)
 		{
-			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDDEN_MESSAGE').'}}', $event['message']);
+			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE').'}}', $event['message']);
 		}
 
 	}
@@ -157,11 +157,25 @@ class listener implements EventSubscriberInterface
 	*/
 	private function check_user_posted_by_topicId($topic_id)
 	{
-
-		// Check if the topic viewer has posted in a topic
-		$b_hide = true; 
-		if ($this->user->data['user_id'] != ANONYMOUS)
+		$b_hide = true;
+		global $auth;
+		
+		$sql = "SELECT forum_id 
+				FROM " . TOPICS_TABLE . "
+				WHERE topic_id = ".$topic_id." "; 
+		$result = $this->db->sql_query($sql);
+		$forum_id = $this->db->sql_fetchrow($result);
+		$forum_id = $forum_id['forum_id'];
+		$this->db->sql_freeresult($result);
+		
+		if ($auth->acl_get('m_', $forum_id))
 		{
+			// If moderator or admin, skip reply check, auto unhide
+			$b_hide = false;
+		}
+		else if ($this->user->data['user_id'] != ANONYMOUS)
+		{
+			// Check if the topic viewer has posted in the topic
 			$sql = "SELECT poster_id, topic_id 
 				FROM " . POSTS_TABLE . "
 				WHERE topic_id = $topic_id 

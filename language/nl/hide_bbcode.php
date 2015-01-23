@@ -1,11 +1,11 @@
 <?php
 /** 
 *
-* simple_hide_bbcode [简体中文]
+* simple_hide_bbcode [Dutch]
 *
 * @package language
-* @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/26 ycl6 Exp $
-* @copyright ycl6 < ycl6@users.sourceforge.net > (Y.C. LIN) http://macphpbbmod.sourceforge.net/
+* @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/04 ycl6 Exp $
+* @copyright Marco van Oort https://github.com/marcovo/
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -39,10 +39,10 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'				=> '这个内容已被隐藏',
-	'HIDEBB_MESSAGE_UNHIDE'				=> '隐藏: 关闭',
-	'HIDEBB_MESSAGE_HIDDEN'				=> '隐藏: 开启',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> '你必须回覆这个主题才能观看到隐藏的内容',
+	'HIDEBB_HIDDEN_MESSAGE'	=>	'Dit bericht is verborgen',
+	'HIDEBB_MESSAGE_UNHIDE'	=>	'VERBERGEN: UIT',
+	'HIDEBB_MESSAGE_HIDDEN'	=>	'VERBERGEN: AAN',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'Je moet een reactie in dit onderwerp plaatsen om dit verborgen bericht te kunnen bekijken',
 ));
 
 ?>

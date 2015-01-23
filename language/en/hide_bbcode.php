@@ -39,10 +39,10 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDDEN_MESSAGE'	=>	'This message has been hidden',
-	'MESSAGE_UNHIDE'	=>	'HIDE: OFF',
-	'MESSAGE_HIDDEN'	=>	'HIDE: ON',
-	'MESSAGE_HIDDEN_DESCRIPTION'	=>	'You need to reply to this topic before you can view the hidden message',
+	'HIDEBB_HIDDEN_MESSAGE'	=>	'This message has been hidden',
+	'HIDEBB_MESSAGE_UNHIDE'	=>	'HIDE: OFF',
+	'HIDEBB_MESSAGE_HIDDEN'	=>	'HIDE: ON',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'You need to reply to this topic before you can view the hidden message',
 ));
 
 ?>

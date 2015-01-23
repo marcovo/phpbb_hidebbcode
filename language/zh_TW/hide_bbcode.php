@@ -39,10 +39,10 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDDEN_MESSAGE'				=> '這個內容已被隱藏',
-	'MESSAGE_UNHIDE'				=> '隱藏: 關閉',
-	'MESSAGE_HIDDEN'				=> '隱藏: 開啟',
-	'MESSAGE_HIDDEN_DESCRIPTION'	=> '你必須回覆這個主題才能觀看到隱藏的內容',
+	'HIDEBB_HIDDEN_MESSAGE'				=> '這個內容已被隱藏',
+	'HIDEBB_MESSAGE_UNHIDE'				=> '隱藏: 關閉',
+	'HIDEBB_MESSAGE_HIDDEN'				=> '隱藏: 開啟',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> '你必須回覆這個主題才能觀看到隱藏的內容',
 ));
 
 ?>
