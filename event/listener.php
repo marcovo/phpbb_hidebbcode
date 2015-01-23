@@ -23,6 +23,7 @@ class listener implements EventSubscriberInterface
 	protected $user;
 	protected $template;
 	protected $config;
+	protected $helper;
 	
 	protected $b_hide = true;
 
@@ -32,17 +33,20 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\db\driver\driver $db Database object
 	* @param \phpbb\controller\helper    $helper        Controller helper object
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\user $user, \phpbb\template\template $template, \phpbb\config\config $config)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\user $user, \phpbb\template\template $template, \phpbb\config\config $config, \phpbb\controller\helper $helper)
 	{
 		$this->db = $db;
 		$this->user = $user;
 		$this->template = $template;
 		$this->config = $config;
+		$this->helper = $helper;
 	}
 
 	static public function getSubscribedEvents()
 	{
 		return array(
+			'core.user_setup'	=> 'load_language_on_setup',
+
 			'core.modify_text_for_display_after'	=> 'parse_bbcodes_after',
 
 			'core.modify_posting_parameters'				=> 'check_user_posted_posting',
@@ -56,6 +60,23 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
+	* Load common files during user setup
+	*
+	* @param object $event The event object
+	* @return null
+	* @access public
+	*/
+	public function load_language_on_setup($event)
+	{
+		$lang_set_ext = $event['lang_set_ext'];
+		$lang_set_ext[] = array(
+			'ext_name' => 'marcovo/hide_bbcode',
+			'lang_set' => 'hide_bbcode',
+		);
+		$event['lang_set_ext'] = $lang_set_ext;
+	}
+
+	/**
 	* Alter BBCodes after they are processed by phpBB
 	*
 	* @param object $event The event object
@@ -64,7 +85,7 @@ class listener implements EventSubscriberInterface
 	{
 		if ($this->b_hide)
 		{
-			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#ise", $this->user->lang['HIDDEN_MESSAGE'], $event['message']);
+			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDDEN_MESSAGE').'}}', $event['message']);
 		}
 
 	}
@@ -191,27 +212,21 @@ class listener implements EventSubscriberInterface
 	*/
 	protected function hidden_pass($matches)
 	{
-		if ($this->b_hide)
+		$this->template->set_style(array('styles', 'ext/marcovo/hide_bbcode/styles'));
+
+		$bbcode = new \bbcode();
+		$bbcode->template_filename = $this->template->get_source_file_for_handle('hide_bbcode.html');
+
+		
+		if ($this->b_hide == false)
 		{
-			$replacements = array(
-				$this->user->lang('HIDE_BBCODE_HIDDEN'),
-				$this->user->lang('HIDE_BBCODE_HIDDEN_EXPLAIN'),
-				'hidebox_hidden',
-			);
+			return $bbcode->bbcode_tpl('unhide_open') . $matches[1] . $bbcode->bbcode_tpl('unhide_close');
 		}
 		else
 		{
-			$replacements = array(
-				$this->user->lang('HIDE_BBCODE_SHOWN'),
-				$matches[1],
-				'hidebox_visible',
-			);
+			return $bbcode->bbcode_tpl('hide');
 		}
-		return str_replace(
-			array('{HIDDEN_TITLE}', '{HIDDEN_CONTENT}', '{HIDDEN_CLASS}'),
-			$replacements,
-			'<div class="hidebox {HIDDEN_CLASS}"><div class="hidebox_title {HIDDEN_CLASS}">{HIDDEN_TITLE}</div><div class="{HIDDEN_CLASS}">{HIDDEN_CONTENT}</div></div>'
-		);
+
 	}
 
 }
