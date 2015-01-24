@@ -48,6 +48,7 @@ class listener implements EventSubscriberInterface
 			'core.user_setup'	=> 'load_language_on_setup',
 
 			'core.modify_text_for_display_after'	=> 'parse_bbcodes_after',
+			'core.modify_format_display_text_after'	=> 'parse_bbcodes_topicPreview',
 
 			'core.modify_posting_parameters'				=> 'check_user_posted_posting',
 			'core.viewtopic_assign_template_vars_before'	=> 'check_user_posted_viewtopic',
@@ -227,6 +228,18 @@ class listener implements EventSubscriberInterface
 		$event['text'] = preg_replace_callback('#<!-- HIDE_BBCODE -->(.*?)<!-- /HIDE_BBCODE -->#s', array($this, 'hidden_pass'), $event['text']);
 
 	}
+
+	/**
+	* Alter BBCodes after they are processed by phpBB
+	*
+	* @param object $event The event object
+	*/
+	public function parse_bbcodes_topicPreview($event)
+	{
+
+		$event['text'] = preg_replace_callback('#<!-- HIDE_BBCODE -->(.*?)<!-- /HIDE_BBCODE -->#s', array($this, 'hidden_pass_topicPreview'), $event['text']);
+
+	}
 	
 	
 	/**
@@ -251,6 +264,24 @@ class listener implements EventSubscriberInterface
 		{
 			return $bbcode->bbcode_tpl('hide');
 		}
+
+	}
+	
+	/**
+	* Convert Hidden BBCode into its final appearance
+	*
+	* @param array $matches
+	* @return string HTML render of hidden bbcode
+	*/
+	protected function hidden_pass_topicPreview($matches)
+	{
+		$this->template->set_style(array('styles', 'ext/marcovo/hide_bbcode/styles'));
+
+		$bbcode = new \bbcode();
+		$bbcode->template_filename = $this->template->get_source_file_for_handle('hide_bbcode.html');
+
+		
+		return $bbcode->bbcode_tpl('unhide_open') . $matches[1] . $bbcode->bbcode_tpl('unhide_close');
 
 	}
 
