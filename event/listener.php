@@ -109,9 +109,20 @@ class listener implements EventSubscriberInterface
 	*/
 	public function check_user_posted_posting($event)
 	{
-		$post_id = $event['post_id'];
-
-		$this->check_user_posted_by_postId($post_id);
+		if($event['mode'] == 'post') {
+			// When just posting, there should be no risk, so we hide nothing.
+			// This is needed when one submits a form which produces an error.
+			// In this case, we need to prevent the [hide]-text from being hidden, which is done here.
+			$this->b_hide = false;
+			return;
+		}
+		
+		if($event['post_id'] != 0) {
+			$this->check_user_posted_by_postId($event['post_id']);
+		}
+		else if($event['topic_id'] != 0) {
+			$this->check_user_posted_by_topicId($event['topic_id']);
+		}
 	}
 
 	/**
