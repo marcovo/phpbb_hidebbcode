@@ -85,7 +85,7 @@ class listener implements EventSubscriberInterface
 	{
 		if ($this->b_hide)
 		{
-			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE').'}}', $event['message']);
+			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $event['message']);
 		}
 
 	}
