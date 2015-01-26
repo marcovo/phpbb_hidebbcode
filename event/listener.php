@@ -56,7 +56,8 @@ class listener implements EventSubscriberInterface
 			
 			'core.viewtopic_modify_post_row'	=> 'check_attachment',
 
-			'test.decode_message_after'	=> 'decode_message_after',
+			'test.topic_review_modify_template_vars'	=> 'topic_review_modify_template_vars',
+			'core.posting_modify_template_vars'	=> 'posting_modify_template_vars',
 		);
 	}
 
@@ -82,11 +83,26 @@ class listener implements EventSubscriberInterface
 	*
 	* @param object $event The event object
 	*/
-	public function decode_message_after($event)
+	public function topic_review_modify_template_vars($event)
 	{
 		if ($this->b_hide)
 		{
-			$event['message'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $event['message']);
+			$event['decoded_message'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $event['decoded_message']);
+		}
+
+	}
+	/**
+	* Alter BBCodes after they are processed by phpBB
+	*
+	* @param object $event The event object
+	*/
+	public function posting_modify_template_vars($event)
+	{
+		if ($this->b_hide && in_array($event['mode'], array('reply', 'quote')) && !$event['preview'] && $event['draft_id'] == 0)
+		{
+			$page_data = $event['page_data'];
+			$page_data['MESSAGE'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $page_data['MESSAGE']);
+			$event['page_data'] = $page_data;
 		}
 
 	}
@@ -111,7 +127,7 @@ class listener implements EventSubscriberInterface
 	public function check_user_posted_posting($event)
 	{
 		if($event['mode'] == 'post') {
-			// When just posting, there should be no risk, so we hide nothing.
+			// When just posting a new topic, there should be no risk, so we hide nothing.
 			// This is needed when one submits a form which produces an error.
 			// In this case, we need to prevent the [hide]-text from being hidden, which is done here.
 			$this->b_hide = false;
@@ -137,9 +153,17 @@ class listener implements EventSubscriberInterface
 
 		$this->check_user_posted_by_postId($post_id);
 		
-		// The [hide]-tags aren't useful in pm's, so remove them if present
 		$post = $event['post'];
-		$post['message_text'] = str_replace(array('[hide]', '[/hide]'), '', $post['message_text']);
+		$bbcode_uid = $post['bbcode_uid'];
+		if($this->b_hide)
+		{
+			$post['message_text'] = preg_replace('#\[hide:'.$bbcode_uid.'\].*?\[/hide:'.$bbcode_uid.'\]#is', '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $post['message_text']);
+		}
+		else
+		{
+			// The [hide]-tags aren't useful in pm's, so replace them if present
+			$post['message_text'] = str_replace(array('[hide:'.$bbcode_uid.']', '[/hide:'.$bbcode_uid.']'), array('{hide}', '{/hide}'), $post['message_text']);
+		}
 		$event['post'] = $post;
 	}
 
