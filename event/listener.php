@@ -54,7 +54,7 @@ class listener implements EventSubscriberInterface
 			'core.viewtopic_assign_template_vars_before'	=> 'check_user_posted_viewtopic',
 			'core.ucp_pm_compose_quotepost_query_after'	=> 'check_user_posted_pm',
 			
-			'core.viewtopic_modify_post_row'	=> 'check_attachment',
+			'core.parse_attachments_modify_template_data'	=> 'check_attachment',
 
 			'test.topic_review_modify_template_vars'	=> 'topic_review_modify_template_vars',
 			'core.posting_modify_template_vars'	=> 'posting_modify_template_vars',
@@ -232,13 +232,12 @@ class listener implements EventSubscriberInterface
 	*/
 	public function check_attachment($event)
 	{
-		$post_row = $event['post_row'];
-		$attachments = $event['attachments'];
-		$row = $event['row'];
-
-		$post_row['S_HAS_ATTACHMENTS'] = ($post_row['S_HAS_ATTACHMENTS'] && $this->b_hide == false) ? true : false;
-
-		$event['post_row'] = $post_row;
+		if($this->b_hide && $event['forum_id'] !== false)
+		{
+			$event['attachment'] = array();
+			$event['block_array'] = array();
+			$event['download_link'] = '';
+		}
 	}
 
 	/**
