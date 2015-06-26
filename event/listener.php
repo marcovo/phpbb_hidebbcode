@@ -56,7 +56,8 @@ class listener implements EventSubscriberInterface
 			
 			'core.parse_attachments_modify_template_data'	=> 'check_attachment',
 
-			'test.topic_review_modify_template_vars'	=> 'topic_review_modify_template_vars',
+			//'test.topic_review_modify_template_vars'	=> 'topic_review_modify_template_vars',
+			'core.topic_review_modify_row'				=> 'topic_review_modify_row',
 			'core.posting_modify_template_vars'	=> 'posting_modify_template_vars',
 
 			'core.viewtopic_modify_post_row'	=> 'viewtopic_modify_post_row',
@@ -93,6 +94,24 @@ class listener implements EventSubscriberInterface
 		}
 
 	}
+
+	/**
+	* Alter BBCodes after they are processed by phpBB
+	*
+	* @param object $event The event object
+	*/
+	public function topic_review_modify_row($event)
+	{
+		if ($this->b_hide)
+		{
+			$post_row = $event['post_row'];
+			$post_row['DECODED_MESSAGE'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $post_row['DECODED_MESSAGE']);
+			$event['post_row'] = $post_row;
+		}
+
+	}
+
+
 	/**
 	* Alter BBCodes after they are processed by phpBB
 	*
