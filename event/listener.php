@@ -58,6 +58,8 @@ class listener implements EventSubscriberInterface
 
 			'test.topic_review_modify_template_vars'	=> 'topic_review_modify_template_vars',
 			'core.posting_modify_template_vars'	=> 'posting_modify_template_vars',
+
+			'core.viewtopic_modify_post_row'	=> 'viewtopic_modify_post_row',
 		);
 	}
 
@@ -237,6 +239,21 @@ class listener implements EventSubscriberInterface
 			$event['attachment'] = array();
 			$event['block_array'] = array();
 			$event['download_link'] = '';
+		}
+	}
+
+	/**
+	* Alter BBCodes after they are processed by phpBB
+	*
+	* @param object $event The event object
+	*/
+	public function viewtopic_modify_post_row($event)
+	{
+		if($this->b_hide && $event['row']['post_attachment'])
+		{
+			$post_row = $event['post_row'];
+			$post_row['S_DISPLAY_NOTICE'] = true;
+			$event['post_row'] = $post_row;
 		}
 	}
 
