@@ -82,7 +82,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Hide the hidden texts when clicking on the 'quote'-button in the post listing on posting.php
 	*
 	* @param object $event The event object
 	*/
@@ -96,7 +96,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Hide the hidden texts when clicking on the 'quote'-button in the post listing on posting.php
 	*
 	* @param object $event The event object
 	*/
@@ -113,7 +113,7 @@ class listener implements EventSubscriberInterface
 
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Hide the hidden texts in the textarea on posting.php
 	*
 	* @param object $event The event object
 	*/
@@ -129,7 +129,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Check whether texts need to be hidden for the topic
 	*
 	* @param object $event The event object
 	*/
@@ -141,7 +141,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Check whether texts need to be hidden for the post/topic
 	*
 	* @param object $event The event object
 	*/
@@ -164,7 +164,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Hide the hidden texts in the textarea on pm page, if quoting from a topic post
 	*
 	* @param object $event The event object
 	*/
@@ -189,7 +189,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Check whether the user has posted in the topic where $post_id is posted in
 	*
 	* @param object $event The event object
 	*/
@@ -208,7 +208,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Check whether the user has posted in a topic
 	*
 	* @param object $event The event object
 	*/
@@ -247,7 +247,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Hide attachments if needed
 	*
 	* @param object $event The event object
 	*/
@@ -262,7 +262,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Alter BBCodes after they are processed by phpBB
+	* Display a notification if we are hiding attachments
 	*
 	* @param object $event The event object
 	*/
