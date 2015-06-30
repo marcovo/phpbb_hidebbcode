@@ -8,7 +8,7 @@
 *
 */
 
-namespace marcovo\hide_bbcode\migrations;
+namespace marcovo\hideBBcode\migrations;
 
 class install_data extends \phpbb\db\migration\migration
 {
@@ -42,7 +42,7 @@ class install_data extends \phpbb\db\migration\migration
 		);
 
 		global $db, $request, $user;
-		$acp_manager = new \marcovo\hide_bbcode\includes\acp_manager($db, $request, $user, $this->phpbb_root_path, $this->php_ext);
+		$acp_manager = new \marcovo\hideBBcode\includes\acp_manager($db, $request, $user, $this->phpbb_root_path, $this->php_ext);
 		$acp_manager->install_bbcodes($bbcode_data);
 	}
 }

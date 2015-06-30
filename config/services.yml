@@ -1,6 +1,6 @@
 services:
-    marcovo.hide_bbcode.listener:
-        class: marcovo\hide_bbcode\event\listener
+    marcovo.hideBBcode.listener:
+        class: marcovo\hideBBcode\event\listener
         arguments:
             - @dbal.conn
             - @user

@@ -8,7 +8,7 @@
 *
 */
 
-namespace marcovo\hide_bbcode\includes;
+namespace marcovo\hideBBcode\includes;
 
 /**
 * ABBC3 ACP manager class

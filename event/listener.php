@@ -7,7 +7,7 @@
 *
 */
 
-namespace marcovo\hide_bbcode\event;
+namespace marcovo\hideBBcode\event;
 
 /**
 * @ignore
@@ -75,7 +75,7 @@ class listener implements EventSubscriberInterface
 	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
-			'ext_name' => 'marcovo/hide_bbcode',
+			'ext_name' => 'marcovo/hideBBcode',
 			'lang_set' => 'hide_bbcode',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
@@ -337,7 +337,7 @@ class listener implements EventSubscriberInterface
 	*/
 	protected function hidden_pass($matches)
 	{
-		$this->template->set_style(array('styles', 'ext/marcovo/hide_bbcode/styles'));
+		$this->template->set_style(array('styles', 'ext/marcovo/hideBBcode/styles'));
 
 		$bbcode = new \bbcode();
 		$bbcode->template_filename = $this->template->get_source_file_for_handle('hide_bbcode.html');
@@ -362,7 +362,7 @@ class listener implements EventSubscriberInterface
 	*/
 	protected function hidden_pass_topicPreview($matches)
 	{
-		$this->template->set_style(array('styles', 'ext/marcovo/hide_bbcode/styles'));
+		$this->template->set_style(array('styles', 'ext/marcovo/hideBBcode/styles'));
 
 		$bbcode = new \bbcode();
 		$bbcode->template_filename = $this->template->get_source_file_for_handle('hide_bbcode.html');

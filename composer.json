@@ -1,5 +1,5 @@
 {
-   "name": "marcovo/hide_bbcode",
+   "name": "marcovo/hideBBcode",
    "type": "phpbb-extension",
    "description": "With the [hide] bbcode, members can hide their message content from people that haven't posted in their topic.",
    "homepage": "https://github.com/marcovo/phpbb_hidebbcode",
