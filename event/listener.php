@@ -123,7 +123,7 @@ class listener implements EventSubscriberInterface
 		{
 			$draft_id = $event['draft_id'];
 		}
-		else // <= phpBB 3.1.5. This does not include edits on $draft_id from other extensions!
+		else // <= phpBB 3.1.5. Code taken from posting.php. This does not include edits on $draft_id from other extensions!
 		{
 			$draft_id	= request_var('d', 0);
 			$mode = $event['mode'];

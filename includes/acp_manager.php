@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* Advanced BBCode Box 3.1
+* Hide_BBcode
 *
-* @copyright (c) 2013 Matt Friedman
+* @copyright (c) 2015 Marco van Oort
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
