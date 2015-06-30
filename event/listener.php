@@ -125,9 +125,9 @@ class listener implements EventSubscriberInterface
 		}
 		else // <= phpBB 3.1.5. Code taken from posting.php. This does not include edits on $draft_id from other extensions!
 		{
-			$draft_id	= request_var('d', 0);
+			global $auth, $request;
+			$draft_id	= $request->variable('d', 0);
 			$mode = $event['mode'];
-			global $auth;
 			
 			// Load requested Draft
 			if ($draft_id && ($mode == 'reply' || $mode == 'quote' || $mode == 'post') && $this->user->data['is_registered'] && $auth->acl_get('u_savedrafts'))
