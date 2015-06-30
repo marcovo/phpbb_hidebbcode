@@ -119,7 +119,35 @@ class listener implements EventSubscriberInterface
 	*/
 	public function posting_modify_template_vars($event)
 	{
-		if ($this->b_hide && in_array($event['mode'], array('reply', 'quote')) && !$event['preview'] && $event['draft_id'] == 0)
+		if(isset($event['draft_id'])) // >= phpBB 3.1.6 ?
+		{
+			$draft_id = $event['draft_id'];
+		}
+		else // <= phpBB 3.1.5. This does not include edits on $draft_id from other extensions!
+		{
+			$draft_id	= request_var('d', 0);
+			$mode = $event['mode'];
+			global $auth;
+			
+			// Load requested Draft
+			if ($draft_id && ($mode == 'reply' || $mode == 'quote' || $mode == 'post') && $this->user->data['is_registered'] && $auth->acl_get('u_savedrafts'))
+			{
+				$sql = 'SELECT draft_subject, draft_message
+					FROM ' . DRAFTS_TABLE . "
+					WHERE draft_id = $draft_id
+						AND user_id = " . $this->user->data['user_id'];
+				$result = $this->db->sql_query_limit($sql, 1);
+				$row = $this->db->sql_fetchrow($result);
+				$this->db->sql_freeresult($result);
+
+				if(!$row)
+				{
+					$draft_id = 0;
+				}
+			}
+		}
+		
+		if ($this->b_hide && in_array($event['mode'], array('reply', 'quote')) && !$event['preview'] && $draft_id == 0)
 		{
 			$page_data = $event['page_data'];
 			$page_data['MESSAGE'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $page_data['MESSAGE']);
