@@ -47,5 +47,5 @@ $lang = array_merge($lang, array(
 	'HIDEBB_HIDDEN_MESSAGE'				=> 'Это сообщение скрыто',
 	'HIDEBB_MESSAGE_UNHIDE'				=> 'HIDE: Открыто',
 	'HIDEBB_MESSAGE_HIDDEN'				=> 'HIDE: Скрыто',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> 'Вы должны быть авторизованы для просмотра скрытого текста',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> 'Вам нужно написать сообщение в теме, после чего вы сможете посмотреть скрытое сообщение',
 ));
