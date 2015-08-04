@@ -272,6 +272,8 @@ class listener implements EventSubscriberInterface
 		}
 		
 		$this->b_hide = $b_hide;
+		
+		$this->template->assign_var('S_HIDE_DOHIDE', $b_hide);
 	}
 
 	/**
