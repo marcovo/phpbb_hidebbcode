@@ -4,8 +4,7 @@
 * simple_hide_bbcode [正體中文]
 *
 * @package language
-* @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/26 ycl6 Exp $
-* @copyright ycl6 < ycl6@users.sourceforge.net > (Y.C. LIN) http://macphpbbmod.sourceforge.net/
+* @copyright (c) 2015 Marco van Oort
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */

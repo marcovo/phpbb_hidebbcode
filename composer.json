@@ -3,7 +3,7 @@
    "type": "phpbb-extension",
    "description": "With the [hide] bbcode, members can hide their message content from people that haven't posted in their topic.",
    "homepage": "https://github.com/marcovo/phpbb_hidebbcode",
-   "version": "0.4.0-a1",
+   "version": "1.0.0",
    "license": "GPL-2.0",
    "authors": [
       {

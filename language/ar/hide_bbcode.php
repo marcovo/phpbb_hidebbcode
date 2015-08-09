@@ -4,8 +4,7 @@
 * simple_hide_bbcode [Arabic]
 *
 * @package language
-* @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/04 ycl6 Exp $
-* @copyright ycl6 < ycl6@users.sourceforge.net > (Y.C. LIN) http://macphpbbmod.sourceforge.net/
+* @copyright (c) 2015 Marco van Oort
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 * Translated By : Bassel Taha Alhitary - www.alhitary.net

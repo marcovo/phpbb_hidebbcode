@@ -4,7 +4,6 @@
 * simple_hide_bbcode [German]
 *
 * @package language
-* @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/04 ycl6 Exp $
 * @copyright Marco van Oort https://github.com/marcovo/ , Miri4ever
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *

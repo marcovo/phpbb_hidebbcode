@@ -4,8 +4,7 @@
 * simple_hide_bbcode [Spanish]
 *
 * @package language
-* @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/04 ycl6 Exp $
-* @copyright ycl6 < ycl6@users.sourceforge.net > (Y.C. LIN) http://macphpbbmod.sourceforge.net/
+* @copyright (c) 2015 Marco van Oort
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 * Translated to the Spanish for zone_sjm https://www.phpbb.com/community/memberlist.php?mode=viewprofile&u=1497666
 *
