@@ -1,12 +1,13 @@
 <?php
 /** 
 *
-* simple_hide_bbcode [English]
+* simple_hide_bbcode [Spanish]
 *
 * @package language
 * @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/04 ycl6 Exp $
 * @copyright ycl6 < ycl6@users.sourceforge.net > (Y.C. LIN) http://macphpbbmod.sourceforge.net/
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* Translated to the Spanish for zone_sjm https://www.phpbb.com/community/memberlist.php?mode=viewprofile&u=1497666
 *
 */
 
@@ -44,9 +45,9 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'	=>	'This message has been hidden',
-	'HIDEBB_MESSAGE_UNHIDE'	=>	'HIDE: OFF',
-	'HIDEBB_MESSAGE_HIDDEN'	=>	'HIDE: ON',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'You need to reply to this topic before you can view the hidden message',
+	'HIDEBB_HIDDEN_MESSAGE'	=>	'Este mensaje a sido oculto.',
+	'HIDEBB_MESSAGE_UNHIDE'	=>	'Ya puedes ver el contenido del mensaje oculto.',
+	'HIDEBB_MESSAGE_HIDDEN'	=>	'Mensaje oculto',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'Tu necesitas responder a este tema para que puedas ver el mensaje oculto.',
 ));
 

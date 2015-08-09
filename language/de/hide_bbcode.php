@@ -50,4 +50,3 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'   =>   'Sie müssen auf diesen Beitrag antworten um die versteckte Nachricht lesen zu können.',
 ));
 
-?>

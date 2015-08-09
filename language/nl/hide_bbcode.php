@@ -50,4 +50,3 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'Je moet een reactie in dit onderwerp plaatsen om dit verborgen bericht te kunnen bekijken',
 ));
 
-?>

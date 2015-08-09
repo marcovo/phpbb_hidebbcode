@@ -50,4 +50,3 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> '你必須回覆這個主題才能觀看到隱藏的內容',
 ));
 
-?>

@@ -50,4 +50,3 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'   =>   'Aby zobaczyć ukrytą treść, musisz odpisać w tym temacie.',
 ));
 
-?>

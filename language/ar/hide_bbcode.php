@@ -51,4 +51,3 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'يجب عليك الرد على هذا الموضوع لمُشاهدة محتوى هذه الرسالة المخفية.',
 ));
 
-?>
