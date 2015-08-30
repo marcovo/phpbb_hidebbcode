@@ -44,8 +44,8 @@ if (empty($lang) || !is_array($lang))
  */ 
 $lang = array_merge($lang, array(
 	'HIDEBB_HIDDEN_MESSAGE'				=> 'Это сообщение скрыто',
-	'HIDEBB_MESSAGE_UNHIDE'				=> 'HIDE: Открыто',
-	'HIDEBB_MESSAGE_HIDDEN'				=> 'HIDE: Скрыто',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> 'Вам нужно написать сообщение в теме, после чего вы сможете посмотреть скрытое сообщение',
+	'HIDEBB_MESSAGE_UNHIDE'				=> 'Сообщение доступно для просмотра',
+	'HIDEBB_MESSAGE_HIDDEN'				=> 'Скрытый контент',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> 'Вам нужно ответить в теме, после чего вы сможете посмотреть скрытое сообщение.',
 ));
 
