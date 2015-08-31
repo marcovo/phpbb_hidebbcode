@@ -47,5 +47,6 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_UNHIDE'	=>	'VERBERGEN: UIT',
 	'HIDEBB_MESSAGE_HIDDEN'	=>	'VERBERGEN: AAN',
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'Je moet een reactie in dit onderwerp plaatsen om dit verborgen bericht te kunnen bekijken',
+	'HIDEBB_HIDE_HELPLINE' => 'Verberg voor bezoekers die geen bericht in dit topic hebben geplaatst: [hide]tekst[/hide]',
 ));
 

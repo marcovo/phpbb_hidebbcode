@@ -34,8 +34,8 @@ class install_data extends \phpbb\db\migration\migration
 	public function install_bbcodes()
 	{
 		$bbcode_data = array(
-			'hidden' => array(
-				'bbcode_helpline'	=> 'ABBC3_HIDDEN_HELPLINE',
+			'hide' => array(
+				'bbcode_helpline'	=> 'HIDEBB_HIDE_HELPLINE',
 				'bbcode_match'		=> '[hide]{TEXT}[/hide]',
 				'bbcode_tpl'		=> '<!-- HIDE_BBCODE -->{TEXT}<!-- /HIDE_BBCODE -->',
 			),

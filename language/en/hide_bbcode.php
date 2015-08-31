@@ -47,5 +47,6 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_UNHIDE'	=>	'HIDE: OFF',
 	'HIDEBB_MESSAGE_HIDDEN'	=>	'HIDE: ON',
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'You need to reply to this topic before you can view the hidden message',
+	'HIDEBB_HIDE_HELPLINE' => 'Hide from people that have not posted in this topic: [hide]text[/hide]',
 ));
 

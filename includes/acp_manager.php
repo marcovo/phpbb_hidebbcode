@@ -12,6 +12,8 @@ namespace marcovo\hideBBcode\includes;
 
 /**
 * ABBC3 ACP manager class
+* 
+* Copied from VSEphpbb's extension
 */
 class acp_manager
 {
