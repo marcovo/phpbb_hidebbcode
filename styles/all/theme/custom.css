@@ -7,7 +7,7 @@ dl.hidebox {
 	font-size: 1em;
 }
 
-dl.hidebox dt {
+dl.hidebox > dt {
 	border-bottom-color:  #CCCCCC;
 	text-transform: uppercase;
 	border-bottom: 1px solid #CCCCCC;
@@ -17,12 +17,17 @@ dl.hidebox dt {
 	display: block;
 }
 
-dt.unhide {
+dl.unhide > dt {
 	color: #339900;
 }
 
-dt.hide {
+dl.hide > dt {
 	color: #990000;
+}
+
+dl.hide > dd {
+	color: #ff0000;
+	font-weight: bold;
 }
 
 blockquote dl.hidebox {
