@@ -43,11 +43,18 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'	=>	'This message has been hidden',
-	'HIDEBB_MESSAGE_UNHIDE'	=>	'HIDE: OFF',
-	'HIDEBB_MESSAGE_HIDDEN'	=>	'HIDE: ON',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'You need to reply to this topic before you can view the hidden message',
-	'HIDEBB_HIDE_HELPLINE' => 'Hide from people that have not posted in this topic: [hide]text[/hide]',
-	'HIDEBB_TFP_NO_DELETE' => 'Deleting thanks is disabled for this post as there is a [hide]-BBCode present in the post.',
+	'ACP_HIDEBBCODE_CAT'			=>	'[hide] BBCode',
+	'ACP_HIDEBBCODE_SETTINGS'		=>	'General settings',
+
+	'HIDEBB_SETTINGS'				=>	'[hide] BBCode general settings',
+	'HIDEBB_SETTINGS_EXPLAIN'		=>	'Here you can configure how the [hide] BBCode behaves.',
+
+	'HIDEBB_REPLY_ENABLE'			=>	'The [hide] code is unhidden when a user has replied in the topic',
+	'HIDEBB_REPLY_ENABLE_EXPLAIN'	=>	'This allows users to view the contents of the [hide] BBCode by posting a reply in the topic.',
+	'HIDEBB_TFP_ENABLE'				=>	'The [hide] code is unhidden when a user thanks the post',
+	'HIDEBB_TFP_ENABLE_EXPLAIN'		=>	'This allows users to view the contents of the [hide] BBCode by thanking a user. If a user has thanked a post that contains a [hide] BBCode, the user may not delete this thank any more.<br />This option only has effect if the ThanksForPosts extension is installed.',
+	'HIDEBB_HIDE_ATTACH'			=>	'Also hide attachments',
+	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Hide attachments in a post, if a [hide] BBCode is present.',
+
 ));
 

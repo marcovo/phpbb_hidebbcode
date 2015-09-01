@@ -1,7 +1,7 @@
 <?php
 /** 
 *
-* simple_hide_bbcode [English]
+* simple_hide_bbcode [Dutch]
 *
 * @package language
 * @copyright (c) 2015 Marco van Oort
@@ -43,11 +43,18 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'	=>	'This message has been hidden',
-	'HIDEBB_MESSAGE_UNHIDE'	=>	'HIDE: OFF',
-	'HIDEBB_MESSAGE_HIDDEN'	=>	'HIDE: ON',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'You need to reply to this topic before you can view the hidden message',
-	'HIDEBB_HIDE_HELPLINE' => 'Hide from people that have not posted in this topic: [hide]text[/hide]',
-	'HIDEBB_TFP_NO_DELETE' => 'Deleting thanks is disabled for this post as there is a [hide]-BBCode present in the post.',
+	'ACP_HIDEBBCODE_CAT'			=>	'[hide] BBCode',
+	'ACP_HIDEBBCODE_SETTINGS'		=>	'Algemene instellingen',
+
+	'HIDEBB_SETTINGS'				=>	'[hide] BBCode algemene instellingen',
+	'HIDEBB_SETTINGS_EXPLAIN'		=>	'Hier kun je configureren hoe de [hide] BBCode zich moet gedragen.',
+
+	'HIDEBB_REPLY_ENABLE'			=>	'De [hide] code wordt onthuld zodra het lid een reactie plaatst in het topic',
+	'HIDEBB_REPLY_ENABLE_EXPLAIN'	=>	'Dit stelt het lid in staat om de inhoud van de [hide] BBCode te bekijken door in het topic een reactie te plaatsen.',
+	'HIDEBB_TFP_ENABLE'				=>	'De [hide] code wordt onthuld zodra het lid het bericht bedankt',
+	'HIDEBB_TFP_ENABLE_EXPLAIN'		=>	'Dit stelt het lid in staat om de inhoud van de [hide] BBCode te bekijken door de plaatser van het bericht te bedanken. Als een lid een bericht heeft bedankt dat een [hide] BBCode bevat, zal het lid dat bedankje niet meer kunnen verwijderen.<br />Deze optie heeft alleen effect als de ThanksForPosts extensie geïnstalleerd is.',
+	'HIDEBB_HIDE_ATTACH'			=>	'Verberg ook bijlagen',
+	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Verberg bijlagen in een bericht, als er een [hide] BBCode aanwezig is.',
+
 ));
 
