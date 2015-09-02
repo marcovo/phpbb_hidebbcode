@@ -5,6 +5,7 @@
 *
 * @package language
 * @copyright (c) 2015 Marco van Oort
+* @translated by LavIgor (https://github.com/lavigor)
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -47,5 +48,6 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_UNHIDE'				=> 'Сообщение доступно для просмотра',
 	'HIDEBB_MESSAGE_HIDDEN'				=> 'Скрытый контент',
 	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=> 'Вам нужно ответить в теме, после чего вы сможете посмотреть скрытое сообщение.',
+	'HIDEBB_HIDE_HELPLINE' => 'Скрыть от пользователей, не ответивших в этой теме: [hide]текст[/hide]',
+	'HIDEBB_TFP_NO_DELETE' => 'Удаление благодарностей недоступно для этого сообщения в связи с наличием в нём [hide]-BBCode.',
 ));
-
