@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'HIDEBB_TFP_ENABLE'				=>	'De [hide] code wordt onthuld zodra het lid het bericht bedankt',
 	'HIDEBB_TFP_ENABLE_EXPLAIN'		=>	'Dit stelt het lid in staat om de inhoud van de [hide] BBCode te bekijken door de plaatser van het bericht te bedanken. Als een lid een bericht heeft bedankt dat een [hide] BBCode bevat, zal het lid dat bedankje niet meer kunnen verwijderen.<br />Deze optie heeft alleen effect als de ThanksForPosts extensie geïnstalleerd is.',
 	'HIDEBB_HIDE_ATTACH'			=>	'Verberg ook bijlagen',
-	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Verberg bijlagen in een bericht, als er een [hide] BBCode aanwezig is.',
+	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Verberg bijlagen in een bericht, als er een [hide] BBCode aanwezig is. Inline bijlagen worden verborgen als zij zich binnen [hide] tags bevinden, anders worden ze weergegeven. Andere bijlagen worden verborgen als er een [hide] bbcode aanwezig is in het bericht.',
 
 ));
 

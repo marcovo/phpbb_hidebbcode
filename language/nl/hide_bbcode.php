@@ -43,11 +43,22 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'	=>	'Dit bericht is verborgen',
-	'HIDEBB_MESSAGE_UNHIDE'	=>	'VERBERGEN: UIT',
-	'HIDEBB_MESSAGE_HIDDEN'	=>	'VERBERGEN: AAN',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'Je moet een reactie in dit onderwerp plaatsen om dit verborgen bericht te kunnen bekijken',
-	'HIDEBB_HIDE_HELPLINE' => 'Verberg voor bezoekers die geen bericht in dit topic hebben geplaatst: [hide]tekst[/hide]',
-	'HIDEBB_TFP_NO_DELETE' => 'Het verwijderen van het bedankje is uitgeschakeld voor dit bericht aangezien er een [hide]-BBCode aanwezig is in het bericht.',
+	'HIDEBB_HIDDEN_MESSAGE'			=> 'Dit bericht is verborgen',
+	'HIDEBB_MESSAGE_UNHIDE'			=> 'VERBERGEN: UIT',
+	'HIDEBB_MESSAGE_HIDDEN'			=> 'VERBERGEN: AAN',
+	'HIDEBB_TFP_NO_DELETE'			=> 'Het verwijderen van het bedankje is uitgeschakeld voor dit bericht omdat er een [hide]-BBCode aanwezig is in het bericht.',
+
+	'HIDEBB_HIDE_HELPLINE_REPLY'			=> 'Verberg voor bezoekers die geen bericht in dit topic hebben geplaatst: [hide]tekst[/hide]',
+	'HIDEBB_HIDE_HELPLINE_THANK'			=> 'Verberg voor bezoekers die dit bericht niet hebben bedankt: [hide]tekst[/hide]',
+	'HIDEBB_HIDE_HELPLINE_REPLY_THANK'		=> 'Verberg voor bezoekers die geen bericht in dit topic hebben geplaatst en dit bericht niet hebben bedankt: [hide]tekst[/hide]',
+
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY'			=> 'Je moet een reactie in dit onderwerp plaatsen om dit verborgen bericht te kunnen bekijken',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_THANK'			=> 'Je moet dit bericht bedanken om dit verborgen bericht te kunnen bekijken',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY_THANK'		=> 'Je moet een reactie in dit onderwerp plaatsen of dit bericht bedanken om dit verborgen bericht te kunnen bekijken',
+
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH'				=> 'Dit bericht bevat verborgen bijlagen.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY'		=> 'Om de bijlagen te bekijken moet je eerst een reactie plaatsen in dit onderwerp.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_THANK'		=> 'Om de bijlagen te bekijken moet je eerst dit bericht bedanken.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY_THANK'	=> 'Om de bijlagen te bekijken moet je eerst een reactie plaatsen in dit onderwerp of dit bericht bedanken.',
 ));
 
