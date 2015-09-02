@@ -68,6 +68,8 @@ class listener implements EventSubscriberInterface
 			'core.viewtopic_modify_post_row'		=> 'viewtopic_modify_post_row',
 			
 			'gfksx.thanksforposts.delete_thanks_before'	=> 'TFP_delete_thanks_before',
+
+			'core.search_modify_rowset'		=> 'search_modify_rowset',
 		);
 	}
 
@@ -114,7 +116,6 @@ class listener implements EventSubscriberInterface
 		$this->user->lang['HIDEBB_MESSAGE_HIDDEN_ATTACH'] = $s_hidden_attach;
 		
 	}
-
 
 	################################################################################
 	#			Functions for checking topics for replies, and posts for thanks
@@ -180,7 +181,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Check whether the user has posted in a topic
 	*
-	* @param object $event The event object
+	* @param int $topic_id The topic id
 	*/
 	private function check_user_posted_by_topicId($topic_id)
 	{
@@ -215,13 +216,65 @@ class listener implements EventSubscriberInterface
 		$this->template->assign_var('S_HIDE_REFRESH_ON_QR', $this->config['hidebbcode_unhide_reply'] && !$this->b_topic_replied && !$this->b_forceUnhide);
 	}
 
+	/**
+	* Check whether the user has posted in topics
+	*
+	* @param array(int) $topic_ids The topic ids
+	*/
+	private function check_user_posted_by_topicIds($topic_ids)
+	{
+		global $auth;
+		
+		$a_topic_replied = array();
+		foreach($topic_ids as $topic_id)
+		{
+			$a_topic_replied[$topic_id] = false;
+		}
+		
+		// Check if the topic viewer has posted in the topic
+		$sql = "SELECT poster_id, topic_id 
+			FROM " . POSTS_TABLE . "
+			WHERE " . $this->db->sql_in_set('topic_id', $topic_ids) . " 
+			AND poster_id = " . $this->user->data['user_id']; 
+		$result = $this->db->sql_query($sql);
+		while($row = $this->db->sql_fetchrow($result))
+		{
+			$a_topic_replied[$row['topic_id']] = true;
+		}
+		$this->db->sql_freeresult($result);
+		
+		// Obtain topic_id -> forum_id relations
+		$forum_ids = array();
+		$sql = "SELECT topic_id, forum_id 
+				FROM " . TOPICS_TABLE . "
+				WHERE " . $this->db->sql_in_set('topic_id', $topic_ids) . " ";
+		$result = $this->db->sql_query($sql);
+		while($row = $this->db->sql_fetchrow($result))
+		{
+			$forum_ids[$row['topic_id']] = $row['forum_id'];
+		}
+		$this->db->sql_freeresult($result);
+		
+		// Check moderator privileges
+		foreach($topic_ids as $topic_id)
+		{
+			if ($auth->acl_get('m_', $forum_ids[$topic_id]))
+			{
+				// If moderator or admin, skip reply check, auto unhide
+				$a_topic_replied[$topic_id] = true;
+			}
+		}
+		
+		return $a_topic_replied;
+	}
+
 
 	/**
 	* TFP: Retrieve which posts in the given topic are thanked by current user
 	*
-	* @param int $topic_id The topic id
+	* @param int $topic_id The topic id (or array of topic ids)
 	*/
-	public function check_posts_thanked_by_topicId($topic_id)
+	private function check_posts_thanked_by_topicId($topic_id)
 	{
 		$this->check_posts_thanked_by('topic_id', $topic_id);
 	}
@@ -229,9 +282,9 @@ class listener implements EventSubscriberInterface
 	/**
 	* TFP: Retrieve whether a post is thanked by current user
 	*
-	* @param int $post_id The post id
+	* @param int $post_id The post id (or array of post ids)
 	*/
-	public function check_posts_thanked_by_postId($post_id)
+	private function check_posts_thanked_by_postId($post_id)
 	{
 		$this->check_posts_thanked_by('post_id', $post_id);
 	}
@@ -240,18 +293,20 @@ class listener implements EventSubscriberInterface
 	* TFP: Retrieve which posts are thanked by current user
 	*
 	* @param string $s_field Either 'post_id' or 'topic_id'
-	* @param int $i_value The post id or topic id
+	* @param int $i_value The post id or topic id (or array of those)
 	*/
 	private function check_posts_thanked_by($s_field, $i_value)
 	{
 		
 		if($this->user->data['user_id'] != ANONYMOUS && $this->config['hidebbcode_unhide_tfp'])
 		{
+			if(!is_array($i_value)) $i_value = array($i_value);
+			
 			$thanks_table = str_replace('config', '', CONFIG_TABLE).'thanks';
 			
 			$sql = "SELECT post_id 
 				FROM " . $thanks_table . "
-				WHERE ".$s_field." = ".$i_value." AND user_id = ".$this->user->data['user_id']." "; 
+				WHERE " . $this->db->sql_in_set($s_field, $i_value) . " AND user_id = ".$this->user->data['user_id']." "; 
 			$result = $this->db->sql_query($sql);
 			while($row = $this->db->sql_fetchrow($result))
 			{
@@ -266,6 +321,44 @@ class listener implements EventSubscriberInterface
 	#			Mark some posts to unhide the hide-codes
 	#################################################################
 	
+	/**
+	* Unhide some codes on the search page
+	*
+	* @param object $event The event object
+	*/
+	public function search_modify_rowset($event)
+	{
+		$a_postIds = array();
+		$a_topicIds = array();
+		
+		$rowset = $event['rowset'];
+		foreach($rowset as $row)
+		{
+			$a_postIds[$row['post_id']] = 1;
+			$a_topicIds[$row['topic_id']] = 1;
+		}
+		
+		$a_postIds = array_keys($a_postIds);
+		$a_topicIds = array_keys($a_topicIds);
+		
+		$a_topic_replied = $this->check_user_posted_by_topicIds($a_topicIds);
+		$this->check_posts_thanked_by_postId($a_postIds);
+		
+		foreach($rowset as $key => $row)
+		{
+			$post_id = $row['post_id'];
+			$topic_id = $row['topic_id'];
+			
+			if(in_array($post_id, $this->a_TFP_topic_posts_thanked) || $a_topic_replied[$topic_id] === true)
+			{
+				$uid = $row['bbcode_uid'];
+				
+				$rowset[$key]['post_text'] = str_replace('[hide:'.$uid.']', '[hide:'.$uid.']'.'{unhide:'.$this->hbuid.'}', $row['post_text']);
+			}
+		}
+		$event['rowset'] = $rowset;
+	}
+
 	/**
 	* TFP: See whether we should unhide some text because of thanks
 	*
