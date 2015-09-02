@@ -43,11 +43,22 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'	=>	'This message has been hidden',
-	'HIDEBB_MESSAGE_UNHIDE'	=>	'HIDE: OFF',
-	'HIDEBB_MESSAGE_HIDDEN'	=>	'HIDE: ON',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'You need to reply to this topic before you can view the hidden message',
-	'HIDEBB_HIDE_HELPLINE' => 'Hide from people that have not posted in this topic: [hide]text[/hide]',
-	'HIDEBB_TFP_NO_DELETE' => 'Deleting thanks is disabled for this post as there is a [hide]-BBCode present in the post.',
+	'HIDEBB_HIDDEN_MESSAGE'			=> 'This message has been hidden',
+	'HIDEBB_MESSAGE_UNHIDE'			=> 'HIDE: OFF',
+	'HIDEBB_MESSAGE_HIDDEN'			=> 'HIDE: ON',
+	'HIDEBB_TFP_NO_DELETE'			=> 'Deleting thanks is disabled for this post as there is a [hide]-BBCode present in the post.',
+
+	'HIDEBB_HIDE_HELPLINE_REPLY'			=> 'Hide from people that have not posted in this topic: [hide]text[/hide]',
+	'HIDEBB_HIDE_HELPLINE_THANK'			=> 'Hide from people that have not thanked this post: [hide]text[/hide]',
+	'HIDEBB_HIDE_HELPLINE_REPLY_THANK'		=> 'Hide from people that have not posted in this topic and have not thanked this post: [hide]text[/hide]',
+
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY'			=> 'You need to reply to this topic before you can view the hidden message',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_THANK'			=> 'You need to thank this post before you can view the hidden message',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY_THANK'		=> 'You need to reply to this topic or thank this post before you can view the hidden message',
+
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH'				=> 'This post contains hidden attachments.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY'		=> 'To view the attachments, you need to reply to this topic.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_THANK'		=> 'To view the attachments, you need to thank this post.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY_THANK'	=> 'To view the attachments, you need to reply to this topic or thank this post.',
 ));
 

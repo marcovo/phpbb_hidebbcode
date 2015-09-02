@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'HIDEBB_TFP_ENABLE'				=>	'The [hide] code is unhidden when a user thanks the post',
 	'HIDEBB_TFP_ENABLE_EXPLAIN'		=>	'This allows users to view the contents of the [hide] BBCode by thanking a user. If a user has thanked a post that contains a [hide] BBCode, the user may not delete this thank any more.<br />This option only has effect if the ThanksForPosts extension is installed.',
 	'HIDEBB_HIDE_ATTACH'			=>	'Also hide attachments',
-	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Hide attachments in a post, if a [hide] BBCode is present.',
+	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Hide attachments in a post, if a [hide] BBCode is present. Inline attachments are hidden if they are inside [hide] tags, otherwise they are shown. Other attachments will be hidden if a [hide] bbcode is present in the post.',
 
 ));
 

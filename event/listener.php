@@ -67,7 +67,7 @@ class listener implements EventSubscriberInterface
 
 			'core.viewtopic_modify_post_row'		=> 'viewtopic_modify_post_row',
 			
-			'ThanksForPosts.delete_thanks_before'	=> 'TFP_delete_thanks_before',
+			'gfksx.thanksforposts.delete_thanks_before'	=> 'TFP_delete_thanks_before',
 		);
 	}
 
@@ -80,13 +80,41 @@ class listener implements EventSubscriberInterface
 	*/
 	public function load_language_on_setup($event)
 	{
-		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
-			'ext_name' => 'marcovo/hideBBcode',
-			'lang_set' => 'hide_bbcode',
-		);
-		$event['lang_set_ext'] = $lang_set_ext;
+
+		$this->user->add_lang_ext('marcovo/hideBBcode', 'hide_bbcode');
+		
+		$s_helpline = '';
+		$s_hidden_desc = '';
+		$s_hidden_attach = $this->user->lang['HIDEBB_MESSAGE_HIDDEN_ATTACH'];
+		
+
+		if($this->config['hidebbcode_unhide_reply'] && $this->config['hidebbcode_unhide_tfp'])
+		{
+			$s_helpline			 = $this->user->lang['HIDEBB_HIDE_HELPLINE_REPLY_THANK'];
+			$s_hidden_desc		 = $this->user->lang['HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY_THANK'];
+			$s_hidden_attach	.= ' '.$this->user->lang['HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY_THANK'];
+		}
+		
+		else if($this->config['hidebbcode_unhide_reply'])
+		{
+			$s_helpline			 = $this->user->lang['HIDEBB_HIDE_HELPLINE_REPLY'];
+			$s_hidden_desc		 = $this->user->lang['HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY'];
+			$s_hidden_attach	.= ' '.$this->user->lang['HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY'];
+		}
+		
+		else if($this->config['hidebbcode_unhide_tfp'])
+		{
+			$s_helpline			 = $this->user->lang['HIDEBB_HIDE_HELPLINE_THANK'];
+			$s_hidden_desc		 = $this->user->lang['HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_THANK'];
+			$s_hidden_attach	.= ' '.$this->user->lang['HIDEBB_MESSAGE_HIDDEN_ATTACH_THANK'];
+		}
+		
+		$this->user->lang['HIDEBB_HIDE_HELPLINE'] = $s_helpline;
+		$this->user->lang['HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'] = $s_hidden_desc;
+		$this->user->lang['HIDEBB_MESSAGE_HIDDEN_ATTACH'] = $s_hidden_attach;
+		
 	}
+
 
 	################################################################################
 	#			Functions for checking topics for replies, and posts for thanks
@@ -443,16 +471,20 @@ class listener implements EventSubscriberInterface
 		if($this->config['hidebbcode_hide_attach'] && !$this->unhide_in_post($event['row']['post_id']) && 
 			$event['row']['post_attachment'] && strpos($event['row']['post_text'], '[hide:') !== false)
 		{
-			$post_row = $event['post_row'];
-			$post_row['S_DISPLAY_NOTICE'] = true;
-			$event['post_row'] = $post_row;
-			
 			$attachments = $event['attachments'];
+
+			if(count($attachments[$event['row']['post_id']]) > 0)
+			{
+				$post_row = $event['post_row'];
+				$post_row['S_HAS_ATTACHMENTS'] = false;
+				$post_row['S_HIDEBBCODE_HIDDEN_ATTACH'] = true;
+				$event['post_row'] = $post_row;
+			}
+			
 			$attachments[$event['row']['post_id']] = array();
 			$event['attachments'] = $attachments;
 		}
 	}
-
 
 	
 	#################################################################
@@ -466,7 +498,11 @@ class listener implements EventSubscriberInterface
 	*/
 	public function TFP_delete_thanks_before($event)
 	{
-
+		if(!$this->config['hidebbcode_unhide_tfp'])
+		{
+			return;
+		}
+		
 		$post_id = $event['post_id'];
 		$forum_id = $event['forum_id'];
 
