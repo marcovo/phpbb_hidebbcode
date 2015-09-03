@@ -25,7 +25,6 @@ class v102_install_data extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.update', array('hide_bbcode_version', '1.0.2')),
 			array('config.add', array('hidebbcode_unhide_reply', true)),
 			array('config.add', array('hidebbcode_unhide_tfp', false)),
 			array('config.add', array('hidebbcode_hide_attach', true)),
@@ -44,6 +43,8 @@ class v102_install_data extends \phpbb\db\migration\migration
 					'modes'				=> array('settings'),
 				),
 			)),
+
+			array('config.update', array('hide_bbcode_version', '1.0.2')),
 		);
 	}
 

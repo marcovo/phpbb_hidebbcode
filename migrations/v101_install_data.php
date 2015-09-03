@@ -25,8 +25,8 @@ class v101_install_data extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.update', array('hide_bbcode_version', '1.0.1')),
 			array('custom', array(array($this, 'update_bbcode'))),
+			array('config.update', array('hide_bbcode_version', '1.0.1')),
 		);
 	}
 
