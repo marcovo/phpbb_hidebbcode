@@ -17,15 +17,15 @@ dl.hidebox > dt {
 	display: block;
 }
 
-dl.unhide > dt {
+dl.hb_unhide > dt {
 	color: #339900;
 }
 
-dl.hide > dt {
+dl.hb_hide > dt {
 	color: #990000;
 }
 
-dl.hide > dd {
+dl.hb_hide > dd {
 	color: #ff0000;
 	font-weight: bold;
 }
