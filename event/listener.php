@@ -351,9 +351,7 @@ class listener implements EventSubscriberInterface
 			
 			if(in_array($post_id, $this->a_TFP_topic_posts_thanked) || $a_topic_replied[$topic_id] === true)
 			{
-				$uid = $row['bbcode_uid'];
-				
-				$rowset[$key]['post_text'] = str_replace('[hide:'.$uid.']', '[hide:'.$uid.']'.'{unhide:'.$this->hbuid.'}', $row['post_text']);
+				$rowset[$key]['post_text'] = str_replace('<s>[hide]</s>', '<s>[hide]</s>'.'{unhide:'.$this->hbuid.'}', $row['post_text']);
 			}
 		}
 		$event['rowset'] = $rowset;
@@ -373,9 +371,7 @@ class listener implements EventSubscriberInterface
 			
 			if(in_array($post_id, $this->a_TFP_topic_posts_thanked))
 			{
-				$uid = $rowset_data['bbcode_uid'];
-				
-				$rowset_data['post_text'] = str_replace('[hide:'.$uid.']', '[hide:'.$uid.']'.'{unhide:'.$this->hbuid.'}', $rowset_data['post_text']);
+				$rowset_data['post_text'] = str_replace('<s>[hide]</s>', '<s>[hide]</s>'.'{unhide:'.$this->hbuid.'}', $rowset_data['post_text']);
 				
 				$event['rowset_data'] = $rowset_data;
 			}
@@ -400,15 +396,14 @@ class listener implements EventSubscriberInterface
 		$this->check_posts_thanked_by_postId($post_id);
 		
 		$post = $event['post'];
-		$bbcode_uid = $post['bbcode_uid'];
 		if(!$this->unhide_in_post($post_id))
 		{
-			$post['message_text'] = preg_replace('#\[hide:'.$bbcode_uid.'\].*?\[/hide:'.$bbcode_uid.'\]#is', '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $post['message_text']);
+			$post['message_text'] = preg_replace('#<HIDE><s>\[hide\]</s>.*?<e>\[/hide\]</e></HIDE>#is', '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}", $post['message_text']);
 		}
 		else
 		{
 			// The [hide]-tags aren't useful in pm's, so replace them if present
-			$post['message_text'] = str_replace(array('[hide:'.$bbcode_uid.']', '[/hide:'.$bbcode_uid.']'), array('{hide}', '{/hide}'), $post['message_text']);
+			$post['message_text'] = str_replace(array('<HIDE><s>[hide]</s>', '<e>[/hide]</e></HIDE>'), array('{hide}', '{/hide}'), $post['message_text']);
 		}
 		$event['post'] = $post;
 	}
@@ -423,7 +418,7 @@ class listener implements EventSubscriberInterface
 		if (!$this->unhide_in_post($event['row']['post_id']))
 		{
 			$post_row = $event['post_row'];
-			$post_row['DECODED_MESSAGE'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $post_row['DECODED_MESSAGE']);
+			$post_row['DECODED_MESSAGE'] = preg_replace("#<HIDE><s>\[hide\]</s>.*?<e>\[/hide\]</e></HIDE>#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}", $post_row['DECODED_MESSAGE']);
 			$event['post_row'] = $post_row;
 		}
 
@@ -467,7 +462,7 @@ class listener implements EventSubscriberInterface
 		if (!$this->unhide_in_post($event['post_id']) && in_array($event['mode'], array('reply', 'quote')) && !$event['preview'] && $draft_id == 0)
 		{
 			$page_data = $event['page_data'];
-			$page_data['MESSAGE'] = preg_replace("#\[hide\].*?\[/hide\]#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}\n", $page_data['MESSAGE']);
+			$page_data['MESSAGE'] = preg_replace("#<HIDE><s>\[hide\]</s>.*?<e>\[/hide\]</e></HIDE>#is", '{{'.$this->user->lang('HIDEBB_HIDDEN_MESSAGE')."}}", $page_data['MESSAGE']);
 			$event['page_data'] = $page_data;
 		}
 
@@ -514,6 +509,12 @@ class listener implements EventSubscriberInterface
 	{
 		$this->template->set_style(array('styles', 'ext/marcovo/hideBBcode/styles'));
 
+		if(!class_exists('\bbcode'))
+		{
+			global $phpbb_root_path, $phpEx;
+			include($phpbb_root_path.'includes/bbcode.'.$phpEx);
+		}
+
 		$bbcode = new \bbcode();
 		$bbcode->template_filename = $this->template->get_source_file_for_handle('hide_bbcode.html');
 
@@ -542,6 +543,12 @@ class listener implements EventSubscriberInterface
 	{
 		$this->template->set_style(array('styles', 'ext/marcovo/hideBBcode/styles'));
 
+		if(!class_exists('\bbcode'))
+		{
+			global $phpbb_root_path, $phpEx;
+			include($phpbb_root_path.'includes/bbcode.'.$phpEx);
+		}
+
 		$bbcode = new \bbcode();
 		$bbcode->template_filename = $this->template->get_source_file_for_handle('hide_bbcode.html');
 
@@ -562,7 +569,7 @@ class listener implements EventSubscriberInterface
 	public function viewtopic_modify_post_row($event)
 	{
 		if($this->config['hidebbcode_hide_attach'] && !$this->unhide_in_post($event['row']['post_id']) && 
-			$event['row']['post_attachment'] && strpos($event['row']['post_text'], '[hide:') !== false)
+			$event['row']['post_attachment'] && strpos($event['row']['post_text'], '<s>[hide]</s>') !== false)
 		{
 			$attachments = $event['attachments'];
 
@@ -608,7 +615,7 @@ class listener implements EventSubscriberInterface
 		$post_text = $post_row['post_text'];
 		$this->db->sql_freeresult($result);
 		
-		if(strpos($post_text, '[hide:') !== false)
+		if(strpos($post_text, '<s>[hide]<\s>') !== false)
 		{
 			global $phpbb_root_path, $phpEx;
 			trigger_error($this->user->lang['HIDEBB_TFP_NO_DELETE'] . '<br /><br />' . $this->user->lang('RETURN_POST', '<a href="' . append_sid($phpbb_root_path."viewtopic.".$phpEx, "f=$forum_id&amp;p=$post_id#p$post_id") . '">', '</a>'));
