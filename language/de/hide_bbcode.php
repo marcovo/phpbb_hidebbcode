@@ -43,9 +43,22 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'   =>   'Diese Nachricht wurde versteckt',
-	'HIDEBB_MESSAGE_UNHIDE'   =>   'Versteckte Nachricht: Aus',
-	'HIDEBB_MESSAGE_HIDDEN'   =>   'Versteckte Nachricht: An',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'   =>   'Sie müssen auf diesen Beitrag antworten um die versteckte Nachricht lesen zu können.',
+	'HIDEBB_HIDDEN_MESSAGE'   =>   'Versteckte Nachricht',
+	'HIDEBB_MESSAGE_UNHIDE'   =>   'Versteckt: Aus',
+	'HIDEBB_MESSAGE_HIDDEN'   =>   'Versteckt: An',
+	'HIDEBB_TFP_NO_DELETE'     =>   'Löschen der Bedankung is deaktiviert, da eine Versteckte Nachricht [hide]-BBCode im Beitrag existiert.',
+
+	'HIDEBB_HIDE_HELPLINE_REPLY'         => 'Verstecke vor Leuten welche im Beitrag nicht geantwortet haben: [hide]text[/hide]',
+	'HIDEBB_HIDE_HELPLINE_THANK'         => 'Verstecke vor Leuten welche im Beitrag sich nicht bedankt haben: [hide]text[/hide]',
+	'HIDEBB_HIDE_HELPLINE_REPLY_THANK'      => 'Verstecke vor Leuten welche im Beitrag nicht geantwortet oder sich nicht bedankt haben: [hide]text[/hide]',
+
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY'         => 'Sie müssen antworten damit Sie die Versteckte Nachricht lesen können',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_THANK'         => 'Sie müssen sich bedanken damit Sie die Versteckte Nachricht lesen können',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY_THANK'      => 'Sie müssen antworten oder sich bedanken damit Sie die Versteckte Nachricht lesen können.',
+
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH'            => 'Dieser Beitrag enthält einen Versteckten Dateianhang',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY'      => 'Um den Dateianhang zu sehen, müssen Sie eine Antwort verfassen.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_THANK'      => 'Um den Dateianhang zu sehen, müssen Sie sich bedanken.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY_THANK'   => 'Um den Dateianhang zu sehen, müssen Sie eine Antwort verfassen oder sich bedanken.',
 ));
 
