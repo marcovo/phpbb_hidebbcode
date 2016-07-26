@@ -4,8 +4,7 @@
 * simple_hide_bbcode [Arabic]
 *
 * @package language
-* @version $Id: simple_hide_bbcode.php,v 1.0 2007/08/04 ycl6 Exp $
-* @copyright ycl6 < ycl6@users.sourceforge.net > (Y.C. LIN) http://macphpbbmod.sourceforge.net/
+* @copyright (c) 2015 Marco van Oort
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 * Translated By : Bassel Taha Alhitary - www.alhitary.net
@@ -14,6 +13,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -40,10 +44,22 @@ if (empty($lang) || !is_array($lang))
  * @TODO:Change this to uppercase things.
  */ 
 $lang = array_merge($lang, array(
-	'HIDEBB_HIDDEN_MESSAGE'	=>	'تم إخفاء محتوى هذه الرسالة',
-	'HIDEBB_MESSAGE_UNHIDE'	=>	'إخفاء: تعطيل',
-	'HIDEBB_MESSAGE_HIDDEN'	=>	'إخفاء: تفعيل',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION'	=>	'يجب عليك الرد على هذا الموضوع لمُشاهدة محتوى هذه الرسالة المخفية.',
+	'HIDEBB_HIDDEN_MESSAGE'			=> 'تم إخفاء محتوى هذه الرسالة',
+	'HIDEBB_MESSAGE_UNHIDE'			=> 'إخفاء: تعطيل',
+	'HIDEBB_MESSAGE_HIDDEN'			=> 'إخفاء: تفعيل',
+	'HIDEBB_TFP_NO_DELETE'			=> 'الغاء الشكر مُعطل في هذه المشاركة بسبب احتوائها على الـ BBCode : إخفاء المحتوى.',
+
+	'HIDEBB_HIDE_HELPLINE_REPLY'			=> 'إخفاء المحتوى من الأعضاء الذين لم يردوا على هذا الموضوع : [hide]النص[/hide]',
+	'HIDEBB_HIDE_HELPLINE_THANK'			=> 'إخفاء المحتوى من الأعضاء الذين لم يشكروا هذه المشاركة : [hide]النص[/hide]',
+	'HIDEBB_HIDE_HELPLINE_REPLY_THANK'		=> 'إخفاء المحتوى من الأعضاء الذين لم يردوا على هذا الموضوع ولم يشكروا هذه المشاركة : [hide]النص[/hide]',
+
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY'			=> 'يجب عليك الرد على هذا الموضوع لمُشاهدة محتوى هذه الرسالة المخفية',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_THANK'			=> 'يجب أن تشكر هذه المشاركة لمُشاهدة محتوى هذه الرسالة المخفية',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY_THANK'		=> 'يجب عليك الرد على هذا الموضوع أو أن تشكر هذه المشاركة لمُشاهدة محتوى هذه الرسالة المخفية',
+
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH'				=> 'هذه المُشاركة تحتوي على مرفقات مخفية.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY'		=> 'يجب عليك الرد على هذا الموضوع لمُشاهدة المرفقات المخفية.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_THANK'		=> 'يجب أن تشكر هذه المشاركة لمُشاهدة المرفقات المخفية.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY_THANK'	=> 'يجب عليك الرد على هذا الموضوع أو أن تشكر هذه المشاركة لمُشاهدة المرفقات المخفية.',
 ));
 
-?>
