@@ -40,17 +40,17 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ACP_HIDEBBCODE_CAT'			=>	'BBCode [hide]',
-	'ACP_HIDEBBCODE_SETTINGS'		=>	'Paramètres généraux',
+	'ACP_HIDEBBCODE_SETTINGS'		=>	'Paramètres',
 
 	'HIDEBB_SETTINGS'				=>	'Paramètres généraux du BBCode [hide]',
 	'HIDEBB_SETTINGS_EXPLAIN'		=>	'Sur cette page, il est possible de configurer la manière dont le BBCode [hide] se comporte.',
 
-	'HIDEBB_REPLY_ENABLE'			=>	'Le contenu masqué est affiché si l’utilisateur a répondu au sujet',
+	'HIDEBB_REPLY_ENABLE'			=>	'Répondre au sujet pour voir le contenu masqué',
 	'HIDEBB_REPLY_ENABLE_EXPLAIN'	=>	'Permet aux utilisateurs de voir le contenu placé entre les balises du BBCode [hide] en publiant une réponse dans le sujet.',
-	'HIDEBB_TFP_ENABLE'				=>	'Le contenu masqué est affiché si l’utilisateur à remercié l’auteur du sujet',
-	'HIDEBB_TFP_ENABLE_EXPLAIN'		=>	'Permet aux utilisateurs de voir le contenu placé entre les balises du BBCode [hide] en remerciant l’auteur du sujet. Si un utilisateur a remercié un message contenant le BBCode [hide] il ne peut plus supprimer son remerciement effectué.<br />Cette option est utile uniquement si l’extension « Thanks For Posts » est installée.',
-	'HIDEBB_HIDE_ATTACH'			=>	'Masquer les pièces jointes',
-	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Masque les pièces jointes placées entre les balises du BBCode [hide] dans un message. Dans le cas contraire, elles seront affichées.',
+	'HIDEBB_TFP_ENABLE'				=>	'Remercier l’auteur du sujet pour voir le contenu masqué',
+	'HIDEBB_TFP_ENABLE_EXPLAIN'		=>	'Permet aux utilisateurs de voir le contenu placé entre les balises du BBCode [hide] en remerciant l’auteur du sujet. Si un utilisateur a remercié un message contenant le BBCode [hide] il ne peut plus supprimer son remerciement effectué.<br />Cette option est effective uniquement si l’extension « Thanks For Posts » est installée.',
+	'HIDEBB_HIDE_ATTACH'			=>	'Masquer les fichiers joints',
+	'HIDEBB_HIDE_ATTACH_EXPLAIN'	=>	'Permet de masquer les fichiers joints placés entre les balises du BBCode [hide] dans un message. Auquel cas contraire, elles seront affichées.',
 
 ));
 
