@@ -44,17 +44,17 @@ $lang = array_merge($lang, array(
 	'HIDEBB_MESSAGE_HIDDEN'			=> 'BBCode [hide] : activé',
 	'HIDEBB_TFP_NO_DELETE'			=> 'La suppression du remerciement a été désactivée pour ce sujet car le BBCode [hide] est présent dans le message.',
 
-	'HIDEBB_HIDE_HELPLINE_REPLY'			=> 'Masquer aux membres qui n’ont pas répondu au sujet : [hide]Contenu texte, etc..[/hide]',
-	'HIDEBB_HIDE_HELPLINE_THANK'			=> 'Masquer aux membres qui n’ont pas rémercié le sujet : [hide]Contenu texte, etc..[/hide]',
-	'HIDEBB_HIDE_HELPLINE_REPLY_THANK'		=> 'Masquer aux membres qui n’ont pas répondu et remercié le sujet : [hide]Contenu texte, etc..[/hide]',
+	'HIDEBB_HIDE_HELPLINE_REPLY'			=> 'Masquer aux membres qui n’ont pas répondu au sujet : [hide]Contenu texte, etc…[/hide]',
+	'HIDEBB_HIDE_HELPLINE_THANK'			=> 'Masquer aux membres qui n’ont pas remercié le sujet : [hide]Contenu texte, etc…[/hide]',
+	'HIDEBB_HIDE_HELPLINE_REPLY_THANK'		=> 'Masquer aux membres qui n’ont pas répondu et remercié le sujet : [hide]Contenu texte, etc…[/hide]',
 
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY'			=> 'Vous devez répondre à ce sujet afin afficher le contenu masqué.',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_THANK'			=> 'Vous devez remercier ce sujet afin afficher le contenu masqué.',
-	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY_THANK'		=> 'Vous devez répondre à ce sujet et le remercier afin afficher le contenu masqué.',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY'			=> 'Pour afficher le contenu masqué vous devez répondre à ce sujet.',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_THANK'			=> 'Pour afficher le contenu masqué vous devez remercier ce sujet.',
+	'HIDEBB_MESSAGE_HIDDEN_DESCRIPTION_REPLY_THANK'		=> 'Pour afficher le contenu masqué vous devez répondre et remercier ce sujet.',
 
-	'HIDEBB_MESSAGE_HIDDEN_ATTACH'				=> 'Ce message contient des pièces jointes masquées.',
-	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY'		=> 'Afin de voir les piéces jointes, vous devez répondre à ce sujet.',
-	'HIDEBB_MESSAGE_HIDDEN_ATTACH_THANK'		=> 'Afin de voir les piéces jointes, vous devez remercier ce sujet.',
-	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY_THANK'	=> 'Afin de voir les piéces jointes, vous devez répondre et remercier ce sujet.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH'				=> 'Ce message contient des fichiers joints masqués.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY'		=> 'Pour afficher les fichiers joints vous devez répondre à ce sujet.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_THANK'		=> 'Pour afficher les fichiers joints vous devez remercier ce sujet.',
+	'HIDEBB_MESSAGE_HIDDEN_ATTACH_REPLY_THANK'	=> 'Pour afficher les fichiers joints vous devez répondre et remercier ce sujet.',
 ));
 
